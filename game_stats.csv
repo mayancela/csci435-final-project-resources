@@ -1,0 +1,29 @@
+game_id,name,genre_id,achievements,positive_ratings,negative_ratings,average_playtime,price
+10,Counter-Strike,AFM,0,124534,3339,17612,7.19
+20,Team Fortress Classic,AFM,0,3318,633,277,3.99
+30,Day of Defeat,FWM,0,3416,398,187,3.99
+40,Deathmatch Classic,AFM,0,1273,267,258,3.99
+60,Ricochet,AFM,0,2758,684,175,3.99
+70,Half-Life,FCA,0,27755,1100,1300,7.19
+80,Counter-Strike: Condition Zero,AFM,0,12120,1439,427,7.19
+220,Half-Life 2,FAS,33,67902,2419,691,7.19
+240,Counter-Strike: Source,AFM,147,76640,3497,6842,7.19
+280,Half-Life: Source,FAS,0,3767,1053,190,0
+300,Day of Defeat: Source,FWM,54,10489,1210,1356,7.19
+320,Half-Life 2: Deathmatch,AFM,0,6020,787,311,3.99
+340,Half-Life 2: Lost Coast,AFS,0,5783,1020,46,0
+360,Half-Life Deathmatch: Source,AFM,0,1362,473,102,0
+380,Half-Life 2: Episode One,FAS,13,7908,517,281,5.79
+400,Portal,PFS,15,51801,1080,288,7.19
+420,Half-Life 2: Episode Two,FAS,22,13902,696,354,5.79
+440,Team Fortress 2,FMS,520,515879,34036,8495,0
+500,Left 4 Dead,ZCF,73,17951,948,897,7.19
+550,Left 4 Dead 2,ZCF,70,251789,8418,1615,7.19
+570,Dota 2,PCF,0,863507,142079,23944,0
+620,Portal 2,PCF,51,138220,1891,1102,7.19
+630,Alien Swarm,FCA,66,17435,941,371,0
+730,Counter-Strike: Global Offensive,FMST,167,2644404,402313,22494,0
+1840,Source Filmmaker,AVF,0,15083,1111,239,0
+273110,Counter-Strike Nexon: Zombies,FZM,65,22130,12127,4047,0
+450390,The Lab,FVA,0,2926,145,95,0
+583950,Artifact,CTS,0,9937,10501,1797,15.99
