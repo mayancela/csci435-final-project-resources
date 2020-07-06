@@ -1,0 +1,142 @@
+create table platform( platform_id varchar(3), platforms varchar(32), PRIMARY KEY (platform_id) );
+
+create table developer( developer_id varchar(6), developers varchar(64), PRIMARY KEY (developer_id) );
+
+create table publisher(publisher_id varchar(6), publisher varchar(64), PRIMARY KEY(publisher_id) );
+
+create table genre(genre_id varchar(3), generes varchar(128), PRIMARY KEY (genre_id ));
+
+create table game_stats(game_id int, name varchar(128), genre_id varchar(3), achievements int, positive_ratings int, negative_ratings int, average_playtime int, price double, FOREIGN KEY (genre_id) REFERENCES genre(genre_id));
+
+create table game_desc(game_id int, developer_id varchar(6), publisher_id varchar(6), platform_id varchar(3), release_date varchar(16), FOREIGN KEY (developer_id) REFERENCES developer(developer_id), FOREIGN KEY (publisher_id) REFERENCES publisher(publisher_id), FOREIGN KEY (platform_id) REFERENCES platform(platform_id));
+
+load data local infile '~/project/csv/platform.txt' into table platform fields terminated by ',' IGNORE 1 LINES;
+
+mysql> select * from platform;
++-------------+------------------+
+| platform_id | platforms        |
++-------------+------------------+
+| W           | windows          |
+| WM          | windows;mac      |
+| WML         | window;mac;linux |
++-------------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> load data local infile '~/project/csv/developer.txt' into table developer fields terminated by ',' IGNORE 1 LINES;
+
+mysql> select * from developer;
++--------------+---------------------------------+
+| developer_id | developers                      |
++--------------+---------------------------------+
+| VD           | Valve                           |
+| VHPED        | Valve;Hidden Path Entertainment |
++--------------+---------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> load data local infile '~/project/csv/publisher.txt' into table publisher fields terminated by ',' IGNORE 1 LINES;
+
+mysql> select * from publisher;
++--------------+-------------------------+
+| publisher_id | publisher               |
++--------------+-------------------------+
+| NKCP         | Nexon Korea Corporation |
+| VP           | Valve                   |
++--------------+-------------------------+
+2 rows in set (0.00 sec)
+
+mysql> load data local infile '~/project/csv/genre.txt' into table genre fields terminated by ',' IGNORE 1 LINES;
+
+mysql> select * from genre;
++----------+----------------------------------------------------+
+| genre_id | genres                                            |
++----------+----------------------------------------------------+
+| AFM      | Action;FPS;Multiplayer                             |
+| AFS      | FPS;Action;Singleplayer                            |
+| AVF      | Animation & Modeling;Video Production;Free to Play |
+| CTS      | Card Game;Trading Card Game;Strategy               |
+| FAS      | FPS;Action;Sci-fi                                  |
+| FCA      | FPS;Classic;Action                                 |
+| FMF      | Free to Play;Multiplayer;FPS                       |
+| FMS      | FPS;Multiplayer;Shooter                            |
+| FVA      | Free to Play;VR;Action                             |
+| FWM      | FPS;World War II;Multiplayer                       |
+| FZM      | Free to Play;Zombies;Multiplayer                   |
+| PCF      | Free to Play;MOBA;Strategy                         |
+| PFS      | Puzzle;First-Person;Singleplayer                   |
+| ZCF      | Zombies;Co-op;FPS                                  |
++----------+----------------------------------------------------+
+14 rows in set (0.00 sec)
+
+mysql> load data local infile '~/project/csv/game.txt' into table game_stats fields terminated by ',' IGNORE 1 LINES;
+
+mysql> select * from game_stats;
++---------+----------------------------------+----------+--------------+------------------+------------------+------------------+-------+
+| game_id | name                             | genre_id | achievements | positive_ratings | negative_ratings | average_playtime | price |
++---------+----------------------------------+----------+--------------+------------------+------------------+------------------+-------+
+|      10 | Counter-Strike                   | AFM      |            0 |           124534 |             3339 |            17612 |  7.19 |
+|      20 | Team Fortress Classic            | AFM      |            0 |             3318 |              633 |              277 |  3.99 |
+|      30 | Day of Defeat                    | FWM      |            0 |             3416 |              398 |              187 |  3.99 |
+|      40 | Deathmatch Classic               | AFM      |            0 |             1273 |              267 |              258 |  3.99 |
+|      60 | Ricochet                         | AFM      |            0 |             2758 |              684 |              175 |  3.99 |
+|      70 | Half-Life                        | FCA      |            0 |            27755 |             1100 |             1300 |  7.19 |
+|      80 | Counter-Strike: Condition Zero   | AFM      |            0 |            12120 |             1439 |              427 |  7.19 |
+|     220 | Half-Life 2                      | FAS      |           33 |            67902 |             2419 |              691 |  7.19 |
+|     240 | Counter-Strike: Source           | AFM      |          147 |            76640 |             3497 |             6842 |  7.19 |
+|     280 | Half-Life: Source                | FAS      |            0 |             3767 |             1053 |              190 |     0 |
+|     300 | Day of Defeat: Source            | FWM      |           54 |            10489 |             1210 |             1356 |  7.19 |
+|     320 | Half-Life 2: Deathmatch          | AFM      |            0 |             6020 |              787 |              311 |  3.99 |
+|     340 | Half-Life 2: Lost Coast          | AFS      |            0 |             5783 |             1020 |               46 |     0 |
+|     360 | Half-Life Deathmatch: Source     | AFM      |            0 |             1362 |              473 |              102 |     0 |
+|     380 | Half-Life 2: Episode One         | FAS      |           13 |             7908 |              517 |              281 |  5.79 |
+|     400 | Portal                           | PFS      |           15 |            51801 |             1080 |              288 |  7.19 |
+|     420 | Half-Life 2: Episode Two         | FAS      |           22 |            13902 |              696 |              354 |  5.79 |
+|     440 | Team Fortress 2                  | FMS      |          520 |           515879 |            34036 |             8495 |     0 |
+|     500 | Left 4 Dead                      | ZCF      |           73 |            17951 |              948 |              897 |  7.19 |
+|     550 | Left 4 Dead 2                    | ZCF      |           70 |           251789 |             8418 |             1615 |  7.19 |
+|     570 | Dota 2                           | PCF      |            0 |           863507 |           142079 |            23944 |     0 |
+|     620 | Portal 2                         | PCF      |           51 |           138220 |             1891 |             1102 |  7.19 |
+|     630 | Alien Swarm                      | FCA      |           66 |            17435 |              941 |              371 |     0 |
+|     730 | Counter-Strike: Global Offensive | FMS      |          167 |          2644404 |           402313 |            22494 |     0 |
+|    1840 | Source Filmmaker                 | AVF      |            0 |            15083 |             1111 |              239 |     0 |
+|  273110 | Counter-Strike Nexon: Zombies    | FZM      |           65 |            22130 |            12127 |             4047 |     0 |
+|  450390 | The Lab                          | FVA      |            0 |             2926 |              145 |               95 |     0 |
+|  583950 | Artifact                         | CTS      |            0 |             9937 |            10501 |             1797 | 15.99 |
++---------+----------------------------------+----------+--------------+------------------+------------------+------------------+-------+
+28 rows in set (0.00 sec)
+
+mysql> load data local infile '~/project/csv/game_platform.txt' into table game_desc fields terminated by ',' IGNORE 1 LINES;
+
+mysql> select * from game_desc;
++---------+--------------+--------------+-------------+--------------+
+| game_id | developer_id | publisher_id | platform_id | release_date |
++---------+--------------+--------------+-------------+--------------+
+|      10 | VD           | VP           | WML         | 11/1/2000    |
+|      20 | VD           | VP           | WML         | 4/1/1999     |
+|      30 | VD           | VP           | WML         | 5/1/2003     |
+|      40 | VD           | VP           | WML         | 6/1/2001     |
+|      60 | VD           | VP           | WML         | 11/1/2000    |
+|      70 | VD           | VP           | WML         | 11/8/1998    |
+|      80 | VD           | VP           | WML         | 3/1/2004     |
+|     220 | VD           | VP           | WML         | 11/16/2004   |
+|     240 | VD           | VP           | WML         | 11/1/2004    |
+|     280 | VD           | VP           | WML         | 6/1/2004     |
+|     300 | VD           | VP           | WML         | 7/12/2010    |
+|     320 | VD           | VP           | WML         | 11/1/2004    |
+|     340 | VD           | VP           | WML         | 10/27/2005   |
+|     360 | VD           | VP           | WML         | 5/1/2006     |
+|     380 | VD           | VP           | WML         | 6/1/2006     |
+|     400 | VD           | VP           | WML         | 10/10/2007   |
+|     420 | VD           | VP           | WML         | 10/10/2007   |
+|     440 | VD           | VP           | WML         | 10/10/2007   |
+|     500 | VD           | VP           | WM          | 11/17/2008   |
+|     550 | VD           | VP           | WML         | 11/19/2009   |
+|     570 | VD           | VP           | WML         | 7/9/2013     |
+|     620 | VD           | VP           | WML         | 4/18/2011    |
+|     630 | VD           | VP           | W           | 7/19/2010    |
+|     730 | VHPED        | VP           | WML         | 8/21/2012    |
+|    1840 | VD           | VP           | W           | 7/10/2012    |
+|  273110 | VD           | NKCP         | W           | 10/7/2014    |
+|  450390 | VD           | VP           | W           | 4/5/2016     |
+|  583950 | VD           | VP           | WML         | 11/28/2018   |
++---------+--------------+--------------+-------------+--------------+
+28 rows in set (0.00 sec)
