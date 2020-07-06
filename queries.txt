@@ -1,0 +1,80 @@
+mysql> select game_stats.name, genre.generes from game_stats INNER JOIN genre ON game_stats.genre_id = genre.genre_id WHERE game_stats.genre_id="AFM";
+
++--------------------------------+------------------------+
+| name                           | generes                |
++--------------------------------+------------------------+
+| Counter-Strike                 | Action;FPS;Multiplayer |
+| Team Fortress Classic          | Action;FPS;Multiplayer |
+| Deathmatch Classic             | Action;FPS;Multiplayer |
+| Ricochet                       | Action;FPS;Multiplayer |
+| Counter-Strike: Condition Zero | Action;FPS;Multiplayer |
+| Counter-Strike: Source         | Action;FPS;Multiplayer |
+| Half-Life 2: Deathmatch        | Action;FPS;Multiplayer |
+| Half-Life Deathmatch: Source   | Action;FPS;Multiplayer |
++--------------------------------+------------------------+
+8 rows in set (0.00 sec)
+
+
+select game_stats.name, platform.platforms, game_stats.positive_ratings from game_stats INNER JOIN game_desc ON game_stats.game_id = game_desc.game_id  INNER JOIN platform ON platform.platform_id = game_desc.platform_id where game_stats.positive_ratings>=10000 ORDER BY game_stats.positive_ratings;
++----------------------------------+------------------+------------------+
+| name                             | platforms        | positive_ratings |
++----------------------------------+------------------+------------------+
+| Day of Defeat: Source            | window;mac;linux |            10489 |
+| Counter-Strike: Condition Zero   | window;mac;linux |            12120 |
+| Half-Life 2: Episode Two         | window;mac;linux |            13902 |
+| Source Filmmaker                 | windows          |            15083 |
+| Alien Swarm                      | windows          |            17435 |
+| Left 4 Dead                      | windows;mac      |            17951 |
+| Counter-Strike Nexon: Zombies    | windows          |            22130 |
+| Half-Life                        | window;mac;linux |            27755 |
+| Portal                           | window;mac;linux |            51801 |
+| Half-Life 2                      | window;mac;linux |            67902 |
+| Counter-Strike: Source           | window;mac;linux |            76640 |
+| Counter-Strike                   | window;mac;linux |           124534 |
+| Portal 2                         | window;mac;linux |           138220 |
+| Left 4 Dead 2                    | window;mac;linux |           251789 |
+| Team Fortress 2                  | window;mac;linux |           515879 |
+| Dota 2                           | window;mac;linux |           863507 |
+| Counter-Strike: Global Offensive | window;mac;linux |          2644404 |
++----------------------------------+------------------+------------------+
+17 rows in set (0.00 sec)
+
+mysql> select game_id, name, achievements from game_stats where achievements!=0;
++---------+----------------------------------+--------------+
+| game_id | name                             | achievements |
++---------+----------------------------------+--------------+
+|     220 | Half-Life 2                      |           33 |
+|     240 | Counter-Strike: Source           |          147 |
+|     300 | Day of Defeat: Source            |           54 |
+|     380 | Half-Life 2: Episode One         |           13 |
+|     400 | Portal                           |           15 |
+|     420 | Half-Life 2: Episode Two         |           22 |
+|     440 | Team Fortress 2                  |          520 |
+|     500 | Left 4 Dead                      |           73 |
+|     550 | Left 4 Dead 2                    |           70 |
+|     620 | Portal 2                         |           51 |
+|     630 | Alien Swarm                      |           66 |
+|     730 | Counter-Strike: Global Offensive |          167 |
+|  273110 | Counter-Strike Nexon: Zombies    |           65 |
++---------+----------------------------------+--------------+
+13 rows in set (0.00 sec)
+
+mysql> select genre.generes, count(game_stats.genre_id) from game_stats INNER JOIN genre ON genre.genre_id = game_stats.genre_id GROUP BY genre.generes;
++----------------------------------------------------+----------------------------+
+| generes                                            | count(game_stats.genre_id) |
++----------------------------------------------------+----------------------------+
+| Action;FPS;Multiplayer                             |                          8 |
+| Animation & Modeling;Video Production;Free to Play |                          1 |
+| Card Game;Trading Card Game;Strategy               |                          1 |
+| FPS;Action;Sci-fi                                  |                          4 |
+| FPS;Action;Singleplayer                            |                          1 |
+| FPS;Classic;Action                                 |                          2 |
+| FPS;Multiplayer;Shooter                            |                          2 |
+| FPS;World War II;Multiplayer                       |                          2 |
+| Free to Play;MOBA;Strategy                         |                          2 |
+| Free to Play;VR;Action                             |                          1 |
+| Free to Play;Zombies;Multiplayer                   |                          1 |
+| Puzzle;First-Person;Singleplayer                   |                          1 |
+| Zombies;Co-op;FPS                                  |                          2 |
++----------------------------------------------------+----------------------------+
+13 rows in set (0.00 sec)
